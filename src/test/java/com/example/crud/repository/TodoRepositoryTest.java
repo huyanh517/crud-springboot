@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 
+import java.util.List;
 import java.util.UUID;
 
 @DataMongoTest
@@ -29,11 +30,14 @@ public class TodoRepositoryTest {
 //    JUnit test for getAll todo
 
     @Test
-
-    public void givenListTodo_when_then() {
-//        given - setup
-
-
+        public void givenTodoList_whenFindAll_thenReturnTodoList() {
+    // given - setup
+        Todo todo = new Todo(UUID.randomUUID().toString().split("-")[0], "Todo Test", "Huy Anh", "Completed");
+        todoRepository.save(todo);
+    // when - action to test
+        List<Todo> todoList = todoRepository.findAll();
+    // then - verify output
+        Assertions.assertThat(todoList).isNotNull();
     }
 
 }
